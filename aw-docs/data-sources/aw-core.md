@@ -8,8 +8,6 @@ AdventureWorks es una base de datos de ejemplo gratuita creada por Microsoft par
 
 Una representación conceptual de la fuente de datos utilizando Modelo Entidad Relacionalidad Extendido (MERX) que muestre las entidades, interrelaciones y atributos.
 
-
-
 ## Modelo lógico
 
 La representación lógico del modelo de datos
