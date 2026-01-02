@@ -2,7 +2,16 @@
 
 ## Resumen
 
-Una descripción general de los objetivos estratégicos y metas de negocio de la empresa.
+ AdventureWorks ha definido sus principales objetivos de negocio, que reflejan las metas de cualquier empresa real. Su objetivo principal es aumentar los márgenes de ganancia a través de dos estrategias clave:
+
+1. Incrementar los ingresos: Esto incluye:
+   – Ampliar la participación en el mercado, ya sea en mercados existentes o nuevos.
+   – Ajustar precios cuidadosamente para aumentar ingresos sin afectar la demanda.
+
+2. Reducir costos: Esto se logrará mediante:
+   – Optimización de la cadena de suministros para mejorar relaciones con proveedores y reducir costos.
+   – Optimización de la línea de ensamblaje para disminuir desperdicios y aumentar capacidad.
+   – Reestructuración de la nómina para asegurar una asignación eficiente de recursos.
 
 ## Modelo conceptual de los requerimientos del negocio
 
