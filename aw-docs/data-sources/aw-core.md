@@ -12,7 +12,541 @@ Una representación conceptual de la fuente de datos utilizando Modelo Entidad R
 
 ## Modelo lógico
 
-La representación lógico del modelo de datos
+Address(AddressId (PK)
+    AddressLine1    
+    AddressLine2
+    City    
+    StateProvinceId (FK->StateProvince.StateProvinceId)  
+    PostalCode  
+    SpatialLocation  
+    rowguid   
+    ModifiedDate)
+
+AddressType(
+    AddressTypeId  (PK)  
+    Name
+    rowguid   
+    ModifiedDate)    
+
+BillOfMaterials(
+    BillOfMaterialsId (PK)   
+    ProductAssemblyId (FK->Product.ProductId)   
+    ComponentId   (FK->Product.ProductId)
+    StartDate   
+    EndDate  
+    UnitMeasureCode (FK->UnitMeasure.UnitMeasureCode)   
+    BOMLevel     
+    PerAssemblyQty     
+    ModifiedDate)
+
+BusinessEntity( 
+    BusinessEntityId (PK)
+    rowguid   
+    ModifiedDate)
+
+BusinessEntityAddress(
+    BusinessEntityId  (PK, FK->BusinessEntity.BusinessEntityId)
+    AddressId  (PK, FK->Addres.Address.Id)
+    AddressTypeId  (PK, FK->AddressType.AddressTypeId)
+    rowguid   
+    ModifiedDate)
+
+BusinessEntityContact(
+    BusinessEntityId  (PK, FK->BusinessEntity.BusinessEntityId)
+    PersonId    (PK, FK->Person.PersonId)
+    ContactTypeId (PK, FK->ContactType.ContactTypeId)   
+    rowguid    
+    ModifiedDate)
+
+ContactType(
+    ContactTypeId  (PK)
+    Name   
+    ModifiedDate)
+
+CountryRegion(
+    CountryRegionCode (PK)   
+    Name   
+    ModifiedDate)
+
+CountryRegionCurrency(
+    CountryRegionCode  (PK, FK->CountryRegion.CountryRegionCode) 
+    CurrencyCode  (PK, FK->Currency.CurrencyCode) 
+    ModifiedDate)
+
+CreditCard(
+    CreditCardId  (PK)
+    CardType     
+    CardNumber   
+    ExpMonth    
+    ExpYear     
+    ModifiedDate)
+
+Culture(
+    CultureId   (PK) 
+    Name     
+    ModifiedDate)
+
+Currency(
+    CurrencyCode  (PK)  
+    Name    
+    ModifiedDate)
+
+CurrencyRate(
+    CurrencyRateId   (PK)
+    CurrencyRateDate     
+    FromCurrencyCode  (FK->Currency.CurrencyCode) 
+    AverageRate     
+    EndOfDayRate   
+    ModifiedDate)
+
+Customer(
+    CustomerId  (PK) 
+    PersonId  (FK->Person.PersonId)
+    StoreId    (FK->Store.StoreId)
+    TerritoryId    (FK->SalesTerritory.TerritoryId)
+    AccountNumber
+    rowguid   
+    ModifiedDate)
+
+EmailAddress( 
+    BusinessEntityId (PK, FK->Person.PersonId)  
+    EmailAddressId
+    EmailAddress  
+    rowguid  
+    ModifiedDate)
+
+Employee( 
+    BusinessEntityId  (PK, FK->Person.PersonId)
+    NationalIdNumber 
+    LoginId  
+    OrganizationNode  
+    OrganizationLevel
+    JobTitle
+    BirthDate
+    MaritalStatus 
+    Gender  
+    HireDate   
+    SalariedFlag  
+    VacationHours 
+    SickLeaveHours  
+    CurrentFlag
+    rowguid  
+    ModifiedDate)  
+
+Illustration(
+    IllustrationId (PK)
+    Diagram   
+    ModifiedDate) 
+
+JobCandidate(
+    JobCandidateId  (PK)
+    BusinessEntityId  (FK->Employee.EmployeeId)
+    Resume  
+    ModifiedDate) 
+
+Location( 
+    LocationId  (PK) 
+    Name  
+    CostRate  
+    Availability   
+    ModifiedDate)  
+
+Password(
+    BusinessEntityId  (PK, FK->Person.PersonId)
+    PasswordHash   
+    PasswordSalt
+    rowguid  
+    ModifiedDate)
+
+Person( 
+    BusinessEntityId  (PK, FK->BusinessEntity.BusinessEntityId)
+    PersonType  
+    NameStyle: 
+    Title  
+    FirstName  
+    MiddleName  
+    LastName   
+    Suffix
+    AdditionalContactInfo 
+    Demographics 
+    rowguid  
+    ModifiedDate)  
+
+PersonCreditCard(
+    BusinessEntityId  (PK, FK->Person.PersonId)
+    CreditCardId   (PK, FK->CreditCard.CreditCardId)
+    ModifiedDate)  
+
+PersonPhone(
+    BusinessEntityId (PK, FK->Person.PersonId)
+    PhoneNumber (PK)
+    PhoneNumberTypeId (PK, FK->PhoneNumberType.PhoneNumberTypeId)
+    ModifiedDate) 
+
+PhoneNumberType( 
+    PhoneNumberTypeId (PK)
+    Name   
+    ModifiedDate)
+
+Produt( 
+    ProductId  (PK)
+    Name  
+    ProductNumber   
+    MakeFlag  
+    Color  
+    SafetyStockLevel   
+    ReorderPoint
+    StandardCost 
+    ListPrice  
+    Size 
+    SizeUnitMeasureCode (FK->UnitMeasure.UnitMeasureCode)
+    WeightUnitMeasureCode (FK->UnitMeasure.UnitMeasureCode)
+    Weight
+    DaysToManufacture 
+    ProductLine
+    Class  
+    Style  
+    ProductSubcategoryId (FK->ProductSubcategory.ProductSubcategoryId)
+    ProductModelId (FK->ProductModel.ProductModelId)
+    SellStartDate 
+    SellEndDate  
+    DiscontinuedDate
+    rowguid  
+    ModifiedDate)  
+
+ProductCategory(  
+    ProductCategoryId (PK)
+    Name  
+    rowguid 
+    ModifiedDate)  
+
+ProductCostHistory(
+    ProductId  (PK, FK->Product.ProductId)
+    StartDate (PK)
+    EndDate  
+    StandardCost  
+    ModifiedDate) 
+
+ProductDescription( 
+    ProductDescriptionId (PK)
+    Description 
+    rowguid
+    ModifiedDate)  
+
+ProductInventory(
+    ProductId (PK, FK->Prduct.ProductId)
+    LocationId (PK, FK->Location.LocationId)
+    Shelf   
+    Bin
+    Quantity  
+    rowguid  
+    ModifiedDate) 
+
+ProductListPriceHistory(
+    ProductId (PK, FK->Product.ProductId)
+    StartDate  (PK)
+    EndDate   
+    ListPrice 
+    ModifiedDate)  
+
+ProductModel(
+    ProductModelId (PK)
+    Name
+    CatalogDescription  
+    Instructions  
+    rowguid  
+    ModifiedDate)
+
+ProductModelIllustration(
+    ProductModelId (PK, FK->ProductModel.ProductModelId)
+    IllustrationId  (PK, FK->Illustration.IllustrationId)
+    ModifiedDate) 
+
+ProductModelProductDescriptionCulture(
+    ProductModelId (PK, FK->ProductModel.ProductModelId)
+    ProductDescriptionId (PK, FK->ProductDescription.ProductDescriptionId)
+    CultureId  (PK, FK->Culture.CultureId)
+    ModifiedDate) 
+
+ProductPhoto(
+    ProductPhotoId (PK)
+    ThumbNailPhoto
+    ThumbNailPhotoFileName
+    LargePhoto
+    LargePhotoFileName
+    ModifiedDate) 
+
+ProductProductPhoto(
+    ProductId  (PK, FK->Prduct.ProductId)
+    ProductPhotoId  (PK, FK->PrductPhoto.ProductPhotoId)
+    Primary
+    ModifiedDate) 
+
+ProductSubcategory(
+    ProductSubcategoryId  (PK)
+    ProductCategoryId  (FK->ProductCategory.ProductCategoryId)
+    Name  
+    rowguid  
+    ModifiedDate) 
+
+ProductVendor(
+    ProductId (PK, FK->Product.ProductId)
+    BusinessEntityId (PK, FK->Vendor.VendorId)
+    AverageLeadTime
+    StandardPrice
+    LastReceiptCost
+    LastReceiptDate
+    MinOrderQty
+    MaxOrderQty
+    OnOrderQty
+    UnitMeasureCode (FK->UnitMeasure.UnitMeasureCode)
+    ModifiedDate
+    )
+ 
+
+PurchaseOrderDetail 
+    (PurchaseOrderId (PK, FK->PurchaseOrder.PurchaseOrderId)
+    PurchaseOrderDetailId (PK)
+    DueDate
+    OrderQty
+    ProductId (FK->Product.ProductId)
+    UnitPrice
+    LineTotal
+    ReceivedQty
+    RejectedQty
+    StockedQty
+    ModifiedDate ) 
+
+PurchaseOrderHeader(
+    PurchaseOrderId  (PK)
+    RevisionNumber 
+    Status  (PK)
+    EmployeeId (FK->Employee.EmployeeId)
+    VendorId (FK->Vendor.VendorId)
+    ShipMethodId  (FK->ShipMethod.ShipMethodId)
+    OrderDate
+    ShipDate
+    SubTotal
+    TaxAmt
+    Freight
+    TotalDue
+    ModifiedDate
+)
+  
+
+SalesOrderDetail
+(
+    SalesOrderId (PK, FK->SalesOrderHeader.SalesOrderId)
+    SalesOrderDetailId (PK)
+    CarrierTrackingNumber
+    OrderQty
+    ProductId (FK->Product.ProductId)
+    SpecialOfferId  (FK->SpecialOffer.SpecialOfferId)
+    UnitPrice
+    UnitPriceDiscount
+    LineTotal
+    rowguid
+    ModifiedDate
+    )  
+
+SalesOrderHeader
+    (
+    SalesOrderId (PK)
+    RevisionNumber
+    OrderDate
+    DueDate
+    ShipDate
+    Status
+    OnlineOrderFlag
+    SalesOrderNumber
+    PurchaseOrderNumber
+    AccountNumber
+    CustomerId (FK->Customer.CustomerId)
+    SalesPersonId  (FK->SalesPerson.SalesPersonId)
+    TerritoryId (FK->SalesTerritory.TerritoryId)
+    BillToAddressId (FK->Address.AddressId)
+    ShipToAddressId (FK->Address.AddressId)
+    ShipMethodId (FK->ShipMethod.ShipMethodId)
+    CreditCardId (FK->CreditCard.CreditCardId)
+    CreditCardApprovalCode
+    CurrencyRateId (FK->CurrencyRate.CurrencyRateId)
+    SubTotal
+    TaxAmt
+    Freight
+    TotalDue
+    Comment
+    rowguid
+    ModifiedDate
+    )
+
+SalesOrderHeaderSalesReason(
+    SalesOrderId  (PK, FK->SalesOrderHeader.SalesOrderId )
+    SalesReasonId (PK, FK->SalesReason.SalesReason) 
+    ModifiedDate) 
+
+SalesPerson: 
+    (
+    BusinessEntityId (PK, FK->Employee.EmployeeId)
+    TerritoryId (FK->SalesTerritory.TerritoryId)
+    SalesQuota
+    Bonus
+    CommissionPct
+    SalesYTD
+    SalesLastYear
+    rowguid
+    ModifiedDate
+    ) 
+
+SalesPersonQuotaHistory 
+    (BusinessEntityId (PK, FK->SalesPerson.SalesPersonId)
+    QuotaDate  (PK)
+    SalesQuota  
+    rowguid 
+    ModifiedDate ) 
+
+SalesReason(
+    SalesReasonId (PK)
+    Name   
+    ReasonType  
+    ModifiedDate )
+
+SalesTaxRate(
+    SalesTaxRateId (PK)
+    StateProvinceId  (FK->StateProvince.StateProvinceId)
+    TaxType  
+    TaxRate
+    Name   
+    rowguid  
+    ModifiedDate) 
+
+SalesTerritory(
+    TerritoryId (PK)
+    Name   
+    CountryRegionCode (FK->CountryRegion.CountryRegionCode)
+    Group  
+    SalesYTD  
+    SalesLastYear  
+    CostYTD 
+    CostLastYear 
+    rowguid 
+    ModifiedDate)  
+
+SalesTerritoryHistory( 
+    BusinessEntityId (PK, FK->SalesPerson.SalesPersonId)
+    TerritoryId  (PK, FK->SalesTerritory.TerritoryId)
+    StartDate (PK)
+    EndDate 
+    rowguid
+    ModifiedDate) 
+
+ScrapReason( 
+    ScrapReasonId (PK)
+    Name   
+    ModifiedDate)
+ShipMethod(
+    ShipMethodId (PK)
+    Name   
+    ShipBase  
+    ShipRate   
+    rowguid 
+    ModifiedDate) 
+
+ShoppingCartItem( 
+    ShoppingCartItemId (PK)
+    ShoppingCartId 
+    Quantity
+    ProductId  (FK->Product.ProductId)
+    DateCreated 
+    ModifiedDate)  
+
+SpecialOffer( 
+    SpecialOfferId (PK)  
+    Description  
+    DiscountPct
+    Type 
+    Category 
+    StartDate
+    EndDate
+    MinQty
+    MaxQty
+    rowguid  
+    ModifiedDate) 
+
+SpecialOfferProduct( 
+    SpecialOfferId (PK, FK->SpecialOffer.SpecialOfferId)
+    ProductId (PK, FK->Product.ProductId)
+    rowguid  
+    ModifiedDate)  
+
+StateProvince( 
+    StateProvinceId  (PK)
+    StateProvinceCode  
+    CountryRegionCode  (FK->CountryRegion.CountryRegionCode)
+    IsOnlyStateProvinceFlag  
+    Name   
+    TerritoryId  (FK->SalesTerritory.TerritoryId)
+    rowguid 
+    ModifiedDate)  
+
+Store(  
+    BusinessEntityId  (PK, FK->BusinessEntity.BusinessEntityId)
+    Name  
+    SalesPersonId (FK->SalesPerson.SalesPersonId)
+    Demographics
+    rowguid  
+    ModifiedDate)  
+
+TransactionHistory(
+    TransactionId   (PK)
+    ProductId   
+    ReferenceOrderId 
+    ReferenceOrderLineId  
+    TransactionDate  
+    TransactionType  
+    Quantity  
+    ActualCost  
+    ModifiedDate) 
+
+UnitMeasure(
+    UnitMeasureCode  (PK)
+    Name  
+    ModifiedDate)  
+
+Vendor(
+    BusinessEntityId (PK, FK->BusinessEntity.BusinessEntityId)
+    AccountNumber
+    Name 
+    CreditRating  
+    PreferredVendorStatus
+    ActiveFlag  
+    PurchasingWebServiceURL 
+    ModifiedDate )
+
+WorkOrder(
+    WorkOrderId  (PK)
+    ProductId (FK->Product.ProductId)
+    OrderQty
+    ScrappedQty   
+    StockedQty 
+    StartDate
+    EndDate
+    DueDate 
+    ScrapReasonId  (FK->ScrapReason.ScrapReasonId)
+    ModifiedDate)  
+
+WorkOrderRouting( 
+    WorkOrderId  (PK, FK->WorkOrder.WorkOrderId)
+    ProductId   (PK)
+    OperationSequence (PK)
+    LocationId   (FK->Location.LocationId)
+    ScheduledStartDate  
+    ScheduledEndDate
+    ActualStartDate 
+    ActualEndDate  
+    ActualResourceHrs 
+    PlannedCost  
+    ActualCost   
+    ModifiedDate) 
 
 ## Catálogo de datos
 
@@ -218,7 +752,7 @@ PhoneNumberTypeId: Es de tipo entero, es la llave primaria por lo que no puede s
 Name: Es de tipo varchar, acepta cadenas de texto hasta 50 caracteres, no puede ser de valor null y representa el nombre de los tipos.   
 ModifiedDate: Es de tipo datetime, no acepta valores null, y maneja automáticamente la fecha y hora en registros sin necesidad de intervención manual.  
 
-### Prodcut: 
+### Produt: 
 Propósito: Presenta información sobre los productos.  
 ProductId: Es de tipo entero, es la llave primaria, no puede ser null, es único y secuencial, representa el ID de los productos.   
 Name: Es de tipo char(50), acepta cadenas de texto de solo 50 caracteres, no acepta valor null y representa el nombre del producto.   
@@ -596,7 +1130,6 @@ Propósito: Presenta detalles sobre las rutas del orden de trabajo.
 WorkOrderId: Es de tipo entero, es la llave primaria por lo que no puede ser null y es de valor único, representa el ID de el orden de trabajo.  
 ProductId: Es de tipo entero, es llave primaria, no puede ser null y es de valor único, representa el ID de los productos.   
 OperationSequence: Es de tipo smallint, donde acepta números hasta 16 bits, es llave orimaria, no acepta valores null, es único y representa la secuencia de operación.   
-OperationSequence: Es de tipo entero, no acepta valores null y representa cantidad de pedido.  
 LocationId: Es de tipo smallint, acepta números de hasta 16 bits, es la llave primaria, no puede ser null, representa el ID de las localizaciones y los valores puede estar duplicados.   
 ScheduledStartDate: Es de tipo datetime, no acepta valores null, y maneja automáticamente la fecha y hora en registros sin necesidad de intervención manual y representa la fecha de inicio programada.  
 ScheduledEndDate: Es de tipo datetime, no acepta valores null y representa la fecha de inicio (año-mes-día).  
