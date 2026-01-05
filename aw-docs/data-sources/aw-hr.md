@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Una breve descripción de la fuente de datos, incluyendo su origen, propósito y el tipo de datos que contiene.
+Es una base de datos conformada por archivos csv, donde se encuentra información sobre los departamentos de la empresa y los empleados.
 
 ## Modelo conceptual
 
