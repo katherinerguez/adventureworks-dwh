@@ -10,15 +10,36 @@ Una representación conceptual de la fuente de datos utilizando Modelo Entidad R
 
 ## Modelo lógico
 
-La representación lógico del modelo de datos
+Shift(
+    ShiftId (PK)
+    Name
+    StartTime
+    EndTime
+    ModifiedD)
+
+EmployeePayHistory(
+    BusinessEntityId
+    RateChangeDate
+    Rate
+    PayFrequency
+    ModifiedDate)
+
+EmployeeDepartmentHistory(
+    BusinessEntityId (PK)
+    DepartmentId (PK, FK->Department.DepartmentId)
+    ShiftId (PK, FK->Shift.ShiftId)
+    StartDate
+    EndDate
+    ModifiedDate)
+
+Department(
+    DepartmentId (PK)
+    Name
+    GroupName
+    ModifiedDate
+)
 
 ## Catálogo de datos
-
-Una descripción completa de cada tabla dentro de la fuente de datos. Este catálogo debe incluir:
-
-- Nombre y propósito de la tabla.
-
-- Lista de campos, incluyendo nombre, tipo de dato, restricciones y descripción de negocio.
 
 ### Shift
 Propósito: Información sobre los turnos laborales. 
@@ -43,4 +64,11 @@ DepartmentId: Es de tipo entero, no null y representa el ID del departamento.
 ShiftId: Es de tipo entero y representa el Id de el turno.
 StartDate: Es de tipo time, no null, y representa la hora de inicio.
 EndDate: Es de tipo time, no null y representa la hora de finalización.
+ModifiedDate: Es de tipo time, no null y representa la fecha de las modificaciones que se realicen.
+
+### Department
+Propósito: Información sobre los departamentos.
+DepartmentId: Es de tipo entero, no null y representa el ID de los departamentos.
+Name: Es de tipo varchar, no null y representa el nombre de los departamentos.
+GroupName: Es de tipo varchar, nu null y representa el nombre del grupo al que pertenece el departamento.
 ModifiedDate: Es de tipo time, no null y representa la fecha de las modificaciones que se realicen.
