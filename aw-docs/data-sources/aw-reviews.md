@@ -2,7 +2,7 @@
 
 ## Resumen
 
-Una breve descripción de la fuente de datos, incluyendo su origen, propósito y el tipo de datos que contiene.
+API para gestionar tiendas, usuarios y reseñas de productos. 
 
 ## Modelo conceptual
 
@@ -19,3 +19,6 @@ Una descripción completa de cada tabla dentro de la fuente de datos. Este catá
 - Nombre y propósito de la tabla.
 
 - Lista de campos, incluyendo nombre, tipo de dato, restricciones y descripción de negocio.
+
+Propósito: 
+
