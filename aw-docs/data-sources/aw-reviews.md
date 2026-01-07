@@ -10,7 +10,27 @@ Una representación conceptual de la fuente de datos utilizando Modelo Entidad R
 
 ## Modelo lógico
 
-La representación lógico del modelo de datos
+stores(
+    id (PK)
+    name 
+)
+
+users(
+    id (PK)
+    firstName
+    lastName
+    email
+    birthdate
+)
+
+reviews(
+    id (PK)
+    userid (FK->users.userid)
+    storeid (FK->stores.storeid)
+    product
+    rating
+    date
+)
 
 ## Catálogo de datos
 
