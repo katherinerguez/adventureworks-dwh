@@ -86,6 +86,18 @@ def defs():
                 region_name=dg.EnvVar("AWS_REGION")
             ),
 
+            "aw_file_rsc": PySparkHTTPCSVResource(
+                pyspark=configured_pyspark,
+                host=dg.EnvVar("AW_HR_FILES_HOST"),
+                port=dg.EnvVar("AW_HR_FILES_PORT")
+            ),
+
+            "aw_review_api_rsc": PySparkAPIResource(
+            pyspark=configured_pyspark,
+            host=dg.EnvVar("AW_REVIEWS_API_HOST"),
+            port=dg.EnvVar("AW_REVIEWS_API_PORT")
+            ),
+
             "dbt_silver_rsc": dbt_silver_resource,
 
             "dbt_gold_rsc": dbt_gold_resource

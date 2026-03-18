@@ -63,6 +63,9 @@ services:
       ports:
         - ${JUPYTER_SERVER_PORT}:8888
         - ${DAGSTER_ADMIN_PORT}:3070
+        - "4040:4040"
+        - "4041:4041"
+        - "4042:4042"
        
 networks:
   dwh_network:
