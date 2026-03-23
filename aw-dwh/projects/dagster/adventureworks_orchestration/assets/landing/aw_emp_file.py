@@ -1,28 +1,34 @@
 import dagster as dg
-from adventureworks_orchestration.resources.api_resorce import PySparkAPIResource
+from adventureworks_orchestration.resources.http_csv_resorce import PySparkHTTPCSVResource
 from adventureworks_orchestration.constants import *
 from pyspark.sql import DataFrame
 from .setup import clean_landing_zone
 
-aw_review_tables = [ "reviews", "stores", "users"]
+aw_hr_tables = ["Shift","EmployeeDepartmentHistory","EmployeePayHistory"]
 
-def get_landing_aw_review_asset(table: str):
+def get_landing_aw_hr_table_asset(table: str):
+    
     @dg.asset(
-        io_manager_key="s3_csv_lake_io_manager",
-        key=[ASSET_GROUP_LANDING, AW_REVIEWS_API_PREFIX, table.lower()],
-        group_name=ASSET_GROUP_LANDING,
-        deps=[clean_landing_zone]
+    key=[ASSET_GROUP_LANDING, AW_HR_FILES_PREFIX,table.lower()],
+    group_name=ASSET_GROUP_LANDING,
+    deps=[clean_landing_zone],
 
-    )
-    def _asset(context: dg.AssetExecutionContext, aw_review_api_rsc : PySparkAPIResource) -> dg.Output[DataFrame]:
-        df = aw_review_api_rsc.fetch_endpoint(table)
+
+    io_manager_key="s3_csv_lake_io_manager"
+)
+
+    def _asset(context: dg.AssetExecutionContext, aw_file_rsc: PySparkHTTPCSVResource) -> dg.Output[DataFrame]:
+
+        file_name = f"{table}.csv"
+        print(file_name)
+        df = aw_file_rsc.fetch_csv(file_name)
 
         return dg.Output(value=df)
 
     return _asset
 
-def get_bronze_aw_review_assets():
-    return [get_landing_aw_review_asset(table) for table in aw_review_tables]
+def get_bronze_aw_emp_assets():
+    return [get_landing_aw_hr_table_asset(table) for table in aw_hr_tables]
 
 
-ASSETS = get_bronze_aw_review_assets()
+ASSETS = get_bronze_aw_emp_assets()
