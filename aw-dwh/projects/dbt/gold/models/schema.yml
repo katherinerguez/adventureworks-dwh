@@ -345,6 +345,25 @@ models:
       - name: taxamount
       - name: freight
 
+  - name: assignment_recommendations
+    description: "Tabla que recomienda la asignación de los 5 mejores vendedores a los 5 territorios con menor rendimiento, priorizada por impacto potencial."
+    columns:
+      - name: salesperson_name
+        description: "Nombre completo del vendedor."
+      - name: salesperson_current_sales
+        description: "Monto total de ventas históricas del vendedor."
+      - name: territory_name
+        description: "Nombre del territorio con bajo rendimiento."
+      - name: territory_current_sales
+        description: "Ventas año a fecha del territorio."
+      - name: sales_growth
+        description: "Crecimiento de ventas del territorio (Ventas YTD - Ventas Año Anterior)."
+      - name: recommendation_priority
+        description: "Prioridad de la recomendación, donde 1 es la más alta."
+        tests:
+          - unique
+          - not_null
+
   - name: onlinesalesreport
     description: "Fact table for internet sales combining order, customer, product, promotion, geography, and dates."
     columns:
