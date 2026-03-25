@@ -364,6 +364,27 @@ models:
           - unique
           - not_null
 
+  - name: raw_material_inventory
+    description: "Analiza y prioriza las materias primas para el aumento de inventario basándose en su criticidad, volatilidad de precios y riesgo de la cadena de suministro."
+    columns:
+      - name: material_name
+        description: "Nombre de la materia prima."
+      - name: products_used_in
+        description: "Número de productos terminados distintos que utilizan esta materia prima."
+      - name: supplier_count
+        description: "Número de proveedores distintos que suministran esta materia prima."
+      - name: current_average_cost
+        description: "Costo promedio de compra pagado por esta materia prima."
+      - name: price_volatility
+        description: "Medida de la volatilidad del precio (desviación estándar del costo). Un valor más alto indica mayor riesgo."
+      - name: final_priority_score
+        description: "Puntaje combinado de riesgo (suma de los rangos individuales). Un puntaje más bajo indica mayor prioridad para aumentar el inventario."
+      - name: overall_priority_rank
+        description: "Rango final de prioridad. 1 es la materia prima de más alta prioridad."
+        tests:
+          - unique
+          - not_null
+
   - name: onlinesalesreport
     description: "Fact table for internet sales combining order, customer, product, promotion, geography, and dates."
     columns:
